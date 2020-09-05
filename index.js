@@ -112,6 +112,20 @@ function viewAllEmployees(){
         });
     }
 
+function viewDepartments(){
+        // let query = "SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary, INNER JOIN department ON role.department_id = department.id ORDER BY ID ASC";
+    connection.query("SELECT * FROM department",
+        (err, res) => {
+            if (err) throw err;
+            console.log("\n");
+                // display the query to view all employees
+            console.table(res);
+                // back to main menu
+            mainMenu()
+        }
+    );
+}
+
 
 
 
