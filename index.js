@@ -31,7 +31,6 @@ function mainMenu() {
             choices: ['View all employees', 'View departments', 'View roles','Add employee', 
             'Add role', 'Add department', 'Update employee role',
             'Remove employee',
-             
             ],
             name: "option"
         
@@ -100,7 +99,6 @@ function mainMenu() {
 
 // functions to be called in switch case after user makes selection
 function viewAllEmployees(){
-    // let query = "SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary, INNER JOIN department ON role.department_id = department.id ORDER BY ID ASC";
     connection.query("SELECT first_name, last_name, title, salary, department FROM employee AS employee INNER JOIN role AS role ON employee.role_id = role.id INNER JOIN department AS department ON role.department_id = department.id",
       (err, res) => {
             if (err) throw err;
@@ -113,7 +111,6 @@ function viewAllEmployees(){
     }
 
 function viewDepartments(){
-        // let query = "SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary, INNER JOIN department ON role.department_id = department.id ORDER BY ID ASC";
     connection.query("SELECT * FROM department",
         (err, res) => {
             if (err) throw err;
@@ -127,7 +124,6 @@ function viewDepartments(){
 }
 
 function viewRole(){
-    // let query = "SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary, INNER JOIN department ON role.department_id = department.id ORDER BY ID ASC";
 connection.query("SELECT * FROM role",
     (err, res) => {
         if (err) throw err;
@@ -140,18 +136,59 @@ connection.query("SELECT * FROM role",
 );
 }
 
+function addDepartment(){
+    inquirer.prompt({
+        type: "input",
+        message: "What department would you like to add?",
+        name: "newDeptName"
+    }).then(function(answers){
+        connection.query("INSERT INTO department (department) VALUES (?)", answers.newDeptName, function(err, res){
+            if (err) throw err;
+            // console.table(res)
+            mainMenu()
+        })
+    })
+}
+
+function addRole(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What's the name of the role?",
+            name: "newRoleName"
+        },
+        {
+            type: "input",
+            message: "What's the salary for this role?(only numbers)",
+            name: "newSalary"
+        },
+        {
+            type: "list",
+            message: "What is the deparment id number",
+            choice: [connection.query("SELECT * FROM department")],
+            name: "newDeptId"
+        }
+    ]).then(function(answers){
+        connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.newRoleName, answers.newSalary, answers.newDeptId], function (err, res){
+            if (err) throw err;
+            mainMenu()
+        });
+    });
+}
 
 
+// function addEmployee(){
 
-// this returns only the employee table
-// var query = connection.query("SELECT * FROM employee" , (err, res) => {
-//     if (err) throw err;
-//     console.table(res);
-//     console.log(answers);
+//     let roleArr = [];
     
-// });
-// console.log(query.sql);
-// });
+// promisemysql.connection.query("INSERT INTO employee (first_name, last_name,"
+    
+// }
+
+
+
+
+
 
 
 

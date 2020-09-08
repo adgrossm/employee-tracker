@@ -102,12 +102,8 @@ INNER JOIN role ON employee.role_id = role.id;
 
 -- attempting to join 3 tables and show all employees
 
-SELECT first_name, last_name, title, salary, department
-FROM employee AS employee
-INNER JOIN role AS role
-ON employee.role_id = role.id
-INNER JOIN department AS department
-ON role.department_id = department.id
+
+
 
 -- full join method
 -- it gives an erro in SQL on line 117 FULL says expecting something
