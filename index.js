@@ -3,6 +3,7 @@ var inquirer = require("inquirer");
 var consoleTable = require("console.table");
 var promisemysql = require("promise-mysql");
 
+
 var connection = mysql.createConnection({
   host: "localhost",
 
@@ -33,31 +34,7 @@ function mainMenu() {
             'Remove employee',
             ],
             name: "option"
-        
-    
 
-        // {
-        //     type: "list",
-        //     message: "What would you like to do?",
-        //     choices: ['View all employees', new inquirer.Separator(), 'View employees by department', 'Add employee', 
-        // 'Update employee role', 'View all roles',
-        // 'View all departments', 'Add a department', 'Add a role'],
-        //     name: "option"
-        // }
-        // {
-        //     type: "input",
-        //     message: "What's the ID of the employee?",
-        //     name: "id"
-        // }
-    
-    // ]).then(answers => {
-    //     console.log(answers)
-    //     connection.query("SELECT * FROM employee WHERE id = " +  answers.option, (err, res) => {
-    //         if (err) throw err;
-    //         console.table(res);
-    //         mainMenu()
-    //     });
-    // });
  
     }).then((answers) => {
         // switch case which changes based on user selection

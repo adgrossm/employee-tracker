@@ -44,5 +44,5 @@ For additional information about the ReadMe Generator you can go to my GitHub pa
 
 For additional questions please email me at: adgrossm@gmail.com
 
-[Video Walkthrough](https://soapbox.wistia.com/videos/pY5wBcn6Fg?preview=true)
+[Video Walkthrough](https://soapbox.wistia.com/videos/80lsNIZxpt)
  
