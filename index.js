@@ -165,7 +165,7 @@ function addRole(){
         {
             type: "list",
             message: "What is the deparment id number",
-            choice: [connection.query("SELECT * FROM department")],
+            choices: [1, 2, 3, 4, 5, 6, 7],
             name: "newDeptId"
         }
     ]).then(function(answers){
@@ -176,16 +176,58 @@ function addRole(){
     });
 }
 
+function addEmployee(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the employee's first name?",
+            name: "empFirstName"
+        },
+        {
+            type: "input",
+            message: "What is the employee's last name?",
+            name: "empLastName"
+        },
+        {
+            type: "list",
+            message: "What is the employee's role id?",
+            choices: [1, 2, 3, 4, 5, 6 , 7, 8],
+            name: "empRoleId"
+        },
 
-// function addEmployee(){
 
-//     let roleArr = [];
-    
-// promisemysql.connection.query("INSERT INTO employee (first_name, last_name,"
-    
-// }
+    ]).then(function(answers){
+        connection.query("INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)", [answers.empFirstName, answers.empLastName, answers.empRoleId],function (err, res){
+        if (err) throw err;
+        console.table(viewAllEmployees())
+        mainMenu()
 
+        });
+    });
+}
 
+function updateEmployeeRole(){
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "Which employee would you like to update their role?",
+            choices: ["Miller", "Brady", "Heather", "Tim", "John", "Ringo", "Gerry", "Clark"],
+            name: "updateRoleFirstName"
+        },
+        {
+            type: "list",
+            message: "What role do you want to update to?",
+            choices: [1, 2, 3, 4, 5, 6, 7, 8],
+            name: "updateRoleId"
+        }
+    ]).then(function(answers){
+        connection.query("UPDATE employee SET role_id=? WHERE first_name= ?", [answers.updateRoleId, answers.updateRoleFirstName],function(err, res){
+            if (err) throw err;
+            console.log(viewAllEmployees())
+            mainMenu()
+        })
+    })
+}
 
 
 
